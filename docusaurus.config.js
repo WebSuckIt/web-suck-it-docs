@@ -11,15 +11,15 @@ const config = {
   favicon: "img/favicon.ico",
 
   // Set the production url of your site here
-  url: "https://web-suck-it.bisohns.com/",
+  url: "https://web-suck-it-docs.websuckit.com/",
   // Set the /<baseUrl>/ pathname under which your site is served
   // For GitHub pages deployment, it is often '/<projectName>/'
-  baseUrl: "/",
+  baseUrl: "/web-suck-it-docs/",
 
   // GitHub pages deployment config.
   // If you aren't using GitHub pages, you don't need these.
-  organizationName: "bisohns", // Usually your GitHub org/user name.
-  projectName: "web-suck-it", // Usually your repo name.
+  organizationName: "websuckit", // Usually your GitHub org/user name.
+  projectName: "web-suck-it-docs", // Usually your repo name.
 
   onBrokenLinks: "throw",
   onBrokenMarkdownLinks: "warn",
