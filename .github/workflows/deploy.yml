@@ -39,4 +39,4 @@ jobs:
           git config --global user.name "DocBot"
           git checkout gh-pages
           git merge -X theirs main
-          git push -q https://${{ secrets.GITHUB_TOKEN }}@github.com/websuckit/web-suck-it-docs.git gh-pages --force
+          git push -q https://${{ secrets.GH_TOKEN }}@github.com/websuckit/web-suck-it-docs.git gh-pages --force
