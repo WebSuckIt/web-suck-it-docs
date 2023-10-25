@@ -65,10 +65,11 @@ const config = {
       // Replace with your project's social card
       image: "img/docusaurus-social-card.jpg",
       navbar: {
-        title: "Websuckit",
+        // title: "Websuckit",
         logo: {
           alt: "Websuckit",
-          src: "img/logo.svg",
+          src: "svg/Logo-dark.svg",
+          srcDark: "svg/Logo-light.svg",
         },
         items: [
           {
@@ -119,7 +120,7 @@ const config = {
               },
               {
                 label: "GitHub",
-                href: "https://github.com/bisohns",
+                href: "https://github.com/websuckit",
               },
             ],
           },
