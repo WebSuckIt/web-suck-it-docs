@@ -29,20 +29,22 @@ jobs:
           node-version: 16.0
 
       - run: yarn install
-      - name: Build and Push to gh-pages
+      - name: Build 
         run: |
-          git config --global push.default simple
-          git config --global user.email "docbot@websuckit.com"
-          git config --global user.name "DocBot"
           yarn build
           # extract content from build folder
           cp -R build/. .
-          git add .
-          git commit -am "Update Documentation"
-          git checkout -b gh-pages
-          git merge -X theirs main
-          git remote set-url origin https://deven96:$TOKEN@github.com/WebSuckIt/web-suck-it-docs.git
-          git remote -v
-          git push --force origin gh-pages
+
+      - name: Deploy to external repository
+        uses: cpina/github-action-push-to-another-repository@main
         env:
-          TOKEN: ${{ secrets.GH_TOKEN }}
+          API_TOKEN_GITHUB: ${{ secrets.GH_TOKEN }}
+        with:
+          source-directory: .
+          destination-github-username: WebSuckIt
+          destination-repository-name: web-suck-it-docs
+          user-email: docbot@websuckit.com
+          user-name: DocBot
+            # It defaults to `main`
+          target-branch: "gh-pages"
+          create-target-branch-if-needed: true
