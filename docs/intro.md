@@ -3,15 +3,15 @@ sidebar_position: 1
 slug: /
 ---
 
-# Tutorial Intro
+# Quick Start
 
-Let's discover **Docusaurus in less than 5 minutes**.
+Welcome to Websuckit, where we offer an innovative approach to integrating socket connections with ease and simplicity, empowering you to achieve your goals with confidence.
 
 ## Getting Started
 
 Get started by **creating a new site**.
 
-Or **try Docusaurus immediately** with **[docusaurus.new](https://docusaurus.new)**.
+Welcome to **Websuckit**, where we offer an innovative approach to integrating socket connections with ease and simplicity, empowering you to achieve your goals with confidence.
 
 ### What you'll need
 
