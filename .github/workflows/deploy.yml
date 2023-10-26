@@ -35,16 +35,28 @@ jobs:
           # extract content from build folder
           cp -R build/. .
 
-      - name: Deploy to external repository
-        uses: cpina/github-action-push-to-another-repository@main
-        env:
-          API_TOKEN_GITHUB: ${{ secrets.API_TOKEN_GITHUB }}
+      - name: Commit files
+        run: |
+          git config --local user.email "docbot@websuckit.com"
+          git config --local user.name "DocBot"
+          git add .
+          git commit -a -m "Update Documentation"
+
+      - name: Push changes
+        uses: ad-m/github-push-action@master
         with:
-          source-directory: .
-          destination-github-username: WebSuckIt
-          destination-repository-name: web-suck-it-docs
-          user-email: docbot@websuckit.com
-          user-name: DocBot
-            # It defaults to `main`
-          target-branch: "gh-pages"
-          create-target-branch-if-needed: true
+          branch: gh-pages
+          force: true
+
+#      - name: Deploy to external repository
+#        uses: cpina/github-action-push-to-another-repository@main
+#        env:
+#          API_TOKEN_GITHUB: ${{ secrets.API_TOKEN_GITHUB }}
+#        with:
+#          source-directory: .
+#          destination-github-username: WebSuckIt
+#          destination-repository-name: web-suck-it-docs
+#          user-email: docbot@websuckit.com
+#          user-name: DocBot
+#          target-branch: gh-pages
+#          create-target-branch-if-needed: true
