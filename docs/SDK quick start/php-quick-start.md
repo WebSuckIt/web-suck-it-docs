@@ -2,7 +2,7 @@
 sidebar_position: 3
 ---
 
-# Php quick start
+# PHP quick start
 
 Documents are **groups of pages** connected through:
 
