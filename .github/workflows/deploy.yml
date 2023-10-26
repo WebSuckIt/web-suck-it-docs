@@ -48,6 +48,9 @@ jobs:
 #          branch: gh-pages
 #          force: true
 
+      - name: Delete git tracker
+        run: rm -rf .git
+
       - name: Push to gh-pages branch
         uses: cpina/github-action-push-to-another-repository@main
         env:
