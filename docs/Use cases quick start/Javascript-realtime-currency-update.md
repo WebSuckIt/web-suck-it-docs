@@ -2,7 +2,7 @@
 sidebar_position: 2
 ---
 
-# Translate your site
+# Javascript realtime currency update
 
 Let's translate `docs/intro.md` to French.
 

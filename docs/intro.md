@@ -3,15 +3,15 @@ sidebar_position: 1
 slug: /
 ---
 
-# Quick Start
+# Getting started
 
 Welcome to Websuckit, where we offer an innovative approach to integrating socket connections with ease and simplicity, empowering you to achieve your goals with confidence.
 
-## Getting Started
+## Create an account
 
 Get started by **creating a new site**.
 
-Welcome to **Websuckit**, where we offer an innovative approach to integrating socket connections with ease and simplicity, empowering you to achieve your goals with confidence.
+[Create account](https://nodejs.org/en/download/), where we offer an innovative approach to integrating socket connections with ease and simplicity, empowering you to achieve your goals with confidence.
 
 ### What you'll need
 
