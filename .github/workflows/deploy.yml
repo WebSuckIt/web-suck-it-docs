@@ -51,12 +51,11 @@ jobs:
       - name: Push to gh-pages branch
         uses: cpina/github-action-push-to-another-repository@main
         env:
-          API_TOKEN_GITHUB: ${{ secrets.API_TOKEN_GITHUB }}
+          SSH_DEPLOY_KEY: ${{ secrets.SSH_DEPLOY_KEY }}
         with:
           source-directory: .
           destination-github-username: WebSuckIt
           destination-repository-name: web-suck-it-docs
-          user-email: docbot@websuckit.com
           user-name: DocBot
           target-branch: gh-pages
           create-target-branch-if-needed: true
