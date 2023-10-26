@@ -85,7 +85,7 @@ const config = {
           // },
           // { to: "/blog", label: "Blog", position: "left" },
           {
-            href: "https://github.com/bisohns",
+            href: "https://github.com/websuckit",
             label: "GitHub",
             position: "right",
           },
