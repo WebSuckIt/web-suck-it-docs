@@ -48,8 +48,8 @@ jobs:
 #          branch: gh-pages
 #          force: true
 
-      - name: Delete old gh-pages branch
-        run: git push --delete origin gh-pages
+      - name: Delete git tracker
+        run: rm -rf .git
 
       - name: Push to gh-pages branch
         uses: cpina/github-action-push-to-another-repository@main
