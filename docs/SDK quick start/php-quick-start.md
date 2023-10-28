@@ -2,9 +2,9 @@
 sidebar_position: 3
 ---
 
-# PHP quick start
+# PHP Quick Start
 
-Documents are **groups of pages** connected through:
+Use this guide to quickly integrate WebSuckIt into your PHP application.
 
 - a **sidebar**
 - **previous/next navigation**

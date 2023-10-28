@@ -2,9 +2,9 @@
 sidebar_position: 2
 ---
 
-# Python quick start
+# Python Quick Start
 
-Docusaurus is a **static-site-generator** (also called **[Jamstack](https://jamstack.org/)**).
+Use this guide to quickly integrate WebSuckIt into your Python application.
 
 It builds your site as simple **static HTML, JavaScript and CSS files**.
 

@@ -2,9 +2,9 @@
 sidebar_position: 1
 ---
 
-# Javascript quick start
+# Javascript Quick Start
 
-Docusaurus creates a **page for each blog post**, but also a **blog index page**, a **tag system**, an **RSS** feed...
+Use this guide to quickly integrate WebSuckIt into your JavaScript application.
 
 ## Create your first Post
 
