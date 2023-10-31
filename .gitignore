@@ -22,3 +22,5 @@ yarn-error.log*
 *.swn
 *.swo
 *.swp
+.env
+.env.local
