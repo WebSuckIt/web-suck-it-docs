@@ -1,5 +1,6 @@
 // @ts-check
 // Note: type annotations allow type checking and IDEs autocompletion
+require('dotenv').config()
 
 const lightCodeTheme = require("prism-react-renderer/themes/github");
 const darkCodeTheme = require("prism-react-renderer/themes/dracula");
@@ -23,6 +24,12 @@ const config = {
 
   onBrokenLinks: "throw",
   onBrokenMarkdownLinks: "warn",
+
+  customFields: {
+    apiKey:process.env.ALGOLIA_API_KEY,
+    appId:process.env.ALGOLIA_APP_ID,
+    indexName:process.env.ALGOLIA_INDEX_NAME,
+  },
 
   // Even if you don't use internalization, you can use this field to set useful
   // metadata like html lang. For example, if your site is Chinese, you may want
@@ -135,6 +142,13 @@ const config = {
       prism: {
         theme: lightCodeTheme,
         darkTheme: darkCodeTheme,
+      },
+      algolia:{
+        apiKey:process.env.ALGOLIA_API_KEY,
+        appId:process.env.ALGOLIA_APP_ID,
+        indexName:process.env.ALGOLIA_INDEX_NAME,
+        contextualSearch:true,
+          
       },
     }),
 };
