@@ -12,13 +12,17 @@ sidebar_position: 1
 npm install @websuckit/js
 ```
 
+or
+
 ### Include via CDN
 
 ```html
 <script src="https://unpkg.com/@websuckit/js/dist/websuckit.umd.js"></script>
 ```
 
-## Installation
+## Initialization
+
+### Import the SDK
 
 import Tabs from "@theme/Tabs";
 import TabItem from "@theme/TabItem";
@@ -36,7 +40,7 @@ import TabItem from "@theme/TabItem";
  </TabItem>
 </Tabs>
 
-## Initialize the SDK
+### Initialize the SDK
 
 ```js
 const ws = new Websuckit({
@@ -46,13 +50,26 @@ const ws = new Websuckit({
 });
 ```
 
-You can obtain your `USER_ID`, `ACCESS_KEY`, and `PUBLIC_KEY` from the [WebSuckIt dashboard](https://websuckit.com). For guidance on how to do this, please refer to the [quick start guide](https://websuckit.com/docs/quick-start).
+You can obtain your `USER_ID`, `ACCESS_KEY`, and `PUBLIC_KEY` from the [WebSuckIt dashboard](https://websuckit.com/api-keys). For guidance on how to do this, please refer to the [**quick start guide**](https://websuckit.com/docs/quick-start).
 
 ## Channel
 
+### Accessing a channel's websocket URL
+
+To obtain a channel's websocket URL, use the `getConnectionUrl` method:
+
+```js
+const connectionUrl = ws.getConnectionUrl({
+ channelName: CHANNEL_NAME,
+ channelPassKey: CHANNEL_PASSKEY
+});
+```
+
 ### Create a channel
 
-To create a channel, you can use the `createChannel` method, it returns a promise that resolves to a channel object. This method takes an object with the `channel` property, specifying the name of the channel you want to create. The channel name should be in the format of a slug, for example, 'test-channel'.
+To create a channel, you can use the `createChannel` method, it returns a [Promise](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise) that resolves to a channel object. This method takes an object with the `channel` property, specifying the name of the channel you want to create. The channel name should be in the format of a slug, for example, 'test-channel'.
+
+> Note: please use only alphanumeric characters and hyphens (-) in channel names.
 
 ```js
 const channelResponse = ws.createChannel({
@@ -62,7 +79,7 @@ const channelResponse = ws.createChannel({
 
 ### Get a channel
 
-To retrieve an existing channel, you can utilize the `getChannel` method. This method takes an object with the channel property, which specifies the name of the channel you wish to retrieve. It returns a promise that resolves to a channel object.
+To retrieve an existing channel, you can utilize the `getChannel` method. This method takes an object with the `channel` property, which specifies the name of the channel you wish to retrieve. It returns a promise that resolves to a channel object.
 
 ```js
 const channelResponse = ws.getChannel({

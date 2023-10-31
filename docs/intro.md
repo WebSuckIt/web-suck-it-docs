@@ -5,24 +5,40 @@ slug: /
 
 # Getting started
 
-Welcome to WebSuckIt, where we offer an innovative approach to integrating socket connections with ease and simplicity, empowering you to achieve your goals with confidence.
+Welcome to WebSuckIt! WebSuckIt simplifies the integration of a websocket platform into your application. In this guide you will how to easily integrate the WebSuckIt real-time platform into your application.
 
-This guide shows you how to integrate WebSuckIt into an application.
+In this guide, you'll learn how to:
 
-You'll learn how to:
-
-- Include the WebSuckIt SDK in a project.
+- Include the WebSuckIt SDK in your project.
 - Establish a realtime connection to WebSuckIt.
-- Create & Subscribe to a channel.
+- Create & connect to a channel.
 
-### Create a WebSuckIt account
+## Create a WebSuckIt account
 
-#### Sign up & get your keys
-To get started with the WebSuckIt SDK, you need to [create](https://websuckit.com/signup) a free account in order to obtain the necessary keys required for using the SDK. To access your User Keys, navigate to your dashboard, hover over the **Account** button in the top right corner of the page, and then click on the **User Keys** button.
+To get started with the WebSuckIt SDK, you need to [**create a free account**](https://websuckit.com/signup) in order to obtain the necessary keys required for using the SDK.
+
+<br/>
+<video width="100%" max controls>
+  <source src="https://github-production-user-asset-6210df.s3.amazonaws.com/23453888/278900133-45b8ee56-6453-4b25-bd94-c1292c9dd83b.mp4" type="video/mp4"/>
+</video>
+
+### Get your keys
+
+To access your User Keys, navigate to your dashboard, hover over the **Account** button in the top right corner of the page, and then click on the **User Keys** button.
+<br/>
+<video width="100%" controls>
+<source src="https://github-production-user-asset-6210df.s3.amazonaws.com/23453888/278900134-d1c15229-15f5-4dd3-8321-c2b6cba04508.mp4" type="video/mp4"/>
+</video>
 
 ### Create a channel
 
 To add a channel, from your dashboard, click the **Add Channel** button, a name is generated for you, but you can change it to whatever you want. Then, click the **Create** button.
+
+<br/>
+<video width="100%" controls>
+
+  <source src="https://github-production-user-asset-6210df.s3.amazonaws.com/23453888/278900131-f71d6108-ffd4-4efe-97de-67f957b578d4.mp4" type="video/mp4"/>
+</video>
 
 ### What you'll need
 
