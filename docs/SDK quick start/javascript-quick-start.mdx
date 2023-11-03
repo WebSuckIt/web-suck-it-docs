@@ -56,7 +56,9 @@ You can obtain your `USER_ID`, `ACCESS_KEY`, and `PUBLIC_KEY` from the [WebSuckI
 
 ### Accessing a channel's websocket URL
 
-To obtain a channel's websocket URL, use the `getConnectionUrl` method:
+To obtain a channel's websocket URL, use the `getConnectionUrl` method. This method takes an object with the following parameters:
+- `channelName`: The name of the channel you want to connect to.
+- `channelPassKey`: The passkey of the channel you want to connect to.
 
 ```js
 const connectionUrl = ws.getConnectionUrl({
@@ -89,7 +91,10 @@ const channelResponse = ws.getChannel({
 
 ### Get channels
 
-You can retrieve a list of all your channels using the `getChannels` method.
+You can retrieve a list of all your channels using the `getChannels` method. This method takes an object with the following parameters:
+- `page`: The page number (0-indexed).
+- `per_page`: The number of channels per page.
+- `search_key` (optional): Filter by channel name.
 
 ```js
 const channelsResponse = ws.getChannels({
@@ -101,7 +106,7 @@ const channelsResponse = ws.getChannels({
 
 ### Get or create channel
 
-You can use the `getOrCreateChannel` method to get an existing channel or create a new one.
+You can use the `getOrCreateChannel` method to get an existing channel or create a new one. This method takes an object with the `channel` property, specifying the name of the channel you want to get or create.
 
 ```js
 const channelResponse = ws.getOrCreateChannel({
