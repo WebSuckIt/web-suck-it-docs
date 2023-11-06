@@ -28,15 +28,11 @@ import Tabs from "@theme/Tabs";
 import TabItem from "@theme/TabItem";
 
 <Tabs>
- <TabItem value="apple" label="ES6" default>
-  <pre>
-   <code>import Websuckit from '@websuckit/js';</code>
-  </pre>
+ <TabItem value="es6" label="ES6" default>
+  <pre>import Websuckit from '@websuckit/js';</pre>
  </TabItem>
- <TabItem value="orange" label="CommonJS">
-  <pre>
-   <code>const Websuckit = require('@websuckit/js');</code>
-  </pre>
+ <TabItem value="commonjs" label="CommonJS">
+  <pre>const Websuckit = require('@websuckit/js');</pre>
  </TabItem>
 </Tabs>
 
@@ -57,6 +53,7 @@ You can obtain your `USER_ID`, `ACCESS_KEY`, and `PUBLIC_KEY` from the [WebSuckI
 ### Accessing a channel's websocket URL
 
 To obtain a channel's websocket URL, use the `getConnectionUrl` method. This method takes an object with the following parameters:
+
 - `channelName`: The name of the channel you want to connect to.
 - `channelPassKey`: The passkey of the channel you want to connect to.
 
@@ -92,6 +89,7 @@ const channelResponse = ws.getChannel({
 ### Get channels
 
 You can retrieve a list of all your channels using the `getChannels` method. This method takes an object with the following parameters:
+
 - `page`: The page number (0-indexed).
 - `per_page`: The number of channels per page.
 - `search_key` (optional): Filter by channel name.
