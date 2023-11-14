@@ -127,3 +127,11 @@ const channelResponse = ws.updateChannel({
  regenerate_pass_key: false // (optional) if true, the channel passkey will be regenerated
 });
 ```
+
+### Delete a channel
+
+Use the deleteChannel method to delete an existing channel.
+
+```js
+$deleteResponse = $ws->deleteChannel("channel-id");
+```
