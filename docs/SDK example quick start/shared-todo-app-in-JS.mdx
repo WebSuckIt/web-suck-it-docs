@@ -1,0 +1,303 @@
+---
+sidebar_position: 1
+---
+
+# Minimal Shared Todo app in JS
+
+```js title="/src/script.js"
+import Websuckit from "@websuckit/js";
+
+const container = document.querySelector(".container");
+const taskform = document.getElementById("new_task_form");
+const tasksList = document.getElementById("tasksList");
+
+// Get PUBLIC_KEY, USER_ID, CHANNEL_PASSKEY, CHANNEL_NAME  from dashboard https://websuckit.com/dashboard
+const publicKey = "PUBLIC_KEY";
+const userId = "USER_ID";
+
+// Websuckit initialization
+const websuckitInit = new Websuckit({
+  userId,
+  publicKey,
+});
+
+// Get websocket  connection url from Websuckit
+const connectionUrl = websuckitInit.getConnectionUrl({
+  channelName: "CHANNEL_NAME", // Insert a valid channel name
+  channelPassKey: "CHANNEL_PASSKEY",
+}).value;
+
+// Connect to websocket Url
+const ws = new WebSocket(connectionUrl);
+
+ws.addEventListener("close", (event) => {
+  console.log("The connection has been closed successfully.");
+});
+
+ws.addEventListener("open", (event) => {
+  console.log("The connection has been opened successfully.");
+  // alert("coonection open");
+});
+
+ws.addEventListener("message", (event) => {
+  console.log("Message from server ", event.data);
+  const data = JSON.parse(event.data);
+  if (data.type === TaskTypes.Add) {
+    addNewTask(data);
+  }
+  if (data.type === TaskTypes.Complete) {
+    completeOldTask(data);
+  }
+});
+
+taskform.addEventListener("submit", function (e) {
+  e.preventDefault();
+  var newtaskInputValue = taskform.elements.new_task_input;
+
+  addTask({
+    id: crypto.randomUUID(),
+    type: TaskTypes.Add,
+    value: newtaskInputValue.value,
+  });
+
+  // Reset input value to empty
+  newtaskInputValue.value = "";
+  container.classList.remove("task_list_empty");
+});
+
+// To  add task in List
+function addNewTask(newTask) {
+  const value = newTask.value;
+  const id = newTask.id;
+
+  // Create li element and set its class
+  const newTaskItem = document.createElement("li");
+  newTaskItem.setAttribute("class", "task_item");
+  newTaskItem.setAttribute("id", id);
+
+  // Create checkbox  element and set its type and  class
+  const newCheckBtn = document.createElement("div");
+  newCheckBtn.setAttribute("class", "task_check_btn");
+
+  // Create span  element and set its class and add new task input
+  const newTaskBio = document.createElement("span");
+  newTaskBio.setAttribute("class", "task_bio");
+  // Put value of input in it
+  newTaskBio.innerText = value; // putting value of input in the li
+
+  // append (insert) li tag in Ul
+  tasksList.appendChild(newTaskItem);
+  // append (insert) checkbox in li
+  newTaskItem.appendChild(newCheckBtn);
+
+  // append (insert) newtask in li
+  newTaskItem.appendChild(newTaskBio);
+
+  // Run this function when task is completed or checknox is checked
+  onTaskComplete(newTaskItem);
+}
+
+function completeOldTask(oldTask) {
+  const id = oldTask.id;
+  const item = document.getElementById(id);
+  if (item !== null) {
+    item.classList.add("taskCompleted");
+  }
+}
+
+// To  add task in List
+function addTask(newTask) {
+  addNewTask(newTask);
+  ws.send(JSON.stringify(newTask));
+}
+
+function completeTask(id) {
+  const complete = {
+    id: id,
+    type: TaskTypes.Complete,
+  };
+  completeOldTask(complete);
+  ws.send(JSON.stringify(complete));
+}
+
+// To remove the completed task
+function onTaskComplete(btns) {
+  btns.addEventListener("click", function (e) {
+    console.log("testing...", e.target);
+    completeTask(e.target.id);
+  });
+}
+```
+
+```html title="/src/index.html"
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>TODO</title>
+
+    <link rel="stylesheet" href="style.css" />
+    <script src="script.js" defer></script>
+  </head>
+
+  <body>
+    <div class="container task_list_empty">
+      <header>
+        <span class="heading">My Todo 🗒️</span>
+      </header>
+
+      <section class="tasks">
+        <ul id="tasksList"></ul>
+      </section>
+
+      <footer>
+        <form id="new_task_form">
+          <input
+            type="text"
+            name="new_task_input"
+            id="new_task_input"
+            placeholder="Create New Task"
+            value=""
+          />
+          <button id="new_task_input_btn" type="submit">Add</button>
+        </form>
+      </footer>
+    </div>
+  </body>
+</html>
+```
+
+```css title="/src/style.css"
+:root {
+  --primary-color: white;
+  --secondary-color: #1e1e1e;
+  --text-color: black;
+  --task-color: white;
+  --footer-color: #1e1e1e;
+  --filter: none;
+  --theme-transition: 0s;
+}
+
+* {
+  font-family: sans-serif;
+  outline: none;
+}
+
+body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+}
+
+.container {
+  position: relative;
+  padding: 30px;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  max-width: 400px;
+  height: 80vh;
+  background-color: rgba(0, 0, 0, 0.03);
+  border-radius: 30px;
+}
+
+header {
+  display: flex;
+  flex-direction: column;
+}
+
+.heading {
+  font-size: 30px;
+}
+
+.tasks {
+  overflow: auto;
+  height: 800px;
+}
+
+#tasksList {
+  padding: 0px;
+}
+
+.task_item {
+  list-style-type: none;
+  border: 1px var(--secondary-color) solid;
+  padding: 10px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  border-radius: 7px;
+  margin-bottom: 20px;
+  background-color: var(--task-color);
+  color: var(--text-color);
+}
+
+.task_item:hover {
+  transition: 0.5s;
+  border: 1px rgba(148, 148, 148, 0.63) solid;
+  cursor: pointer;
+  background-color: rgba(226, 226, 226, 0.192);
+}
+
+.task_check_btn {
+  width: 10px;
+  height: 10px;
+  margin-right: 16px;
+  padding: 3px;
+  border: 2px var(--secondary-color) solid;
+  /* color: var(--primary-color); */
+  background-position: center;
+  background-size: contain;
+  border-radius: 50%;
+  border: 2px grey solid;
+  cursor: pointer;
+}
+
+.task_bio {
+  font-size: 18px;
+}
+
+.task-completed {
+  transition: 0.5s;
+  transform: scale(90%);
+  text-decoration: line-through;
+  color: rgb(150, 150, 150);
+  opacity: 0;
+}
+
+footer {
+  width: 100%;
+}
+
+footer form {
+  display: flex;
+  flex-direction: row;
+  align-content: center;
+  gap: 10px;
+}
+
+#new_task_input {
+  width: 80%;
+  font-size: 20px;
+  color: black;
+  padding: 5px 0;
+  background-color: transparent;
+  border: none;
+  border-bottom: 1px goldenrod solid;
+}
+
+#new_task_input::placeholder {
+  font-size: 16px;
+}
+
+#new_task_input_btn {
+  width: 20%;
+}
+
+.taskCompleted {
+  visibility: hidden;
+}
+```
