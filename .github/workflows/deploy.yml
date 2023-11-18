@@ -26,7 +26,7 @@ jobs:
       - name: Use Node.js 
         uses: actions/setup-node@v3
         with:
-          node-version: 16.0
+          node-version: 18.16.0
 
       - run: yarn install
       - name: Build Documentation
@@ -34,19 +34,11 @@ jobs:
           yarn build
           # extract content from build folder
           cp -R build/. .
+        env:
+          ALGOLIA_APP_ID: ${{ secrets.ALGOLIA_APP_ID }}
+          ALGOLIA_API_KEY: ${{ secrets.ALGOLIA_API_KEY }}
+          ALGOLIA_INDEX_NAME: ${{ secrets.ALGOLIA_INDEX_NAME }}
 
-#      - name: Commit files
-#        run: |
-#          git config --local user.email "docbot@websuckit.com"
-#          git config --local user.name "DocBot"
-#          git add .
-#          git commit -a -m "Update Documentation"
-
-#      - name: Push changes
-#        uses: ad-m/github-push-action@master
-#        with:
-#          branch: gh-pages
-#          force: true
 
       - name: Delete git tracker
         run: rm -rf .git

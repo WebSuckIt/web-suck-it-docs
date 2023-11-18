@@ -1,0 +1,137 @@
+---
+sidebar_position: 1
+---
+
+# Javascript Quick Start
+
+## Integrate the WebSuckIt SDK to your JavaScript application
+
+### Install via NPM
+
+```bash
+npm install @websuckit/js
+```
+
+or
+
+### Include via CDN
+
+```html
+<script src="https://unpkg.com/@websuckit/js/dist/websuckit.umd.js"></script>
+```
+
+## Initialization
+
+### Import the SDK
+
+import Tabs from "@theme/Tabs";
+import TabItem from "@theme/TabItem";
+
+<Tabs>
+ <TabItem value="es6" label="ES6" default>
+  <pre>import Websuckit from '@websuckit/js';</pre>
+ </TabItem>
+ <TabItem value="commonjs" label="CommonJS">
+  <pre>const Websuckit = require('@websuckit/js');</pre>
+ </TabItem>
+</Tabs>
+
+### Initialize the SDK
+
+```js
+const ws = new Websuckit({
+ userId: USER_ID,
+ accessKey: ACCESS_KEY,
+ publicKey: PUBLIC_KEY
+});
+```
+
+You can obtain your `USER_ID`, `ACCESS_KEY`, and `PUBLIC_KEY` from the [WebSuckIt dashboard](https://websuckit.com/api-keys). For guidance on how to do this, please refer to the [**quick start guide**](https://websuckit.com/docs/quick-start).
+
+## Channel
+
+### Accessing a channel's websocket URL
+
+To obtain a channel's websocket URL, use the `getConnectionUrl` method. This method takes an object with the following parameters:
+
+- `channelName`: The name of the channel you want to connect to.
+- `channelPassKey`: The passkey of the channel you want to connect to.
+
+```js
+const connectionUrl = ws.getConnectionUrl({
+ channelName: CHANNEL_NAME,
+ channelPassKey: CHANNEL_PASSKEY
+});
+```
+
+### Create a channel
+
+To create a channel, you can use the `createChannel` method, it returns a [Promise](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise) that resolves to a channel object. This method takes an object with the `channel` property, specifying the name of the channel you want to create. The channel name should be in the format of a slug, for example, 'test-channel'.
+
+> Note: please use only alphanumeric characters and hyphens (-) in channel names.
+
+```js
+const channelResponse = ws.createChannel({
+ channel: "channel-name"
+});
+```
+
+### Get a channel
+
+To retrieve an existing channel, you can utilize the `getChannel` method. This method takes an object with the `channel` property, which specifies the name of the channel you wish to retrieve. It returns a promise that resolves to a channel object.
+
+```js
+const channelResponse = ws.getChannel({
+ channel: "channel-name"
+});
+```
+
+### Get channels
+
+You can retrieve a list of all your channels using the `getChannels` method. This method takes an object with the following parameters:
+
+- `page`: The page number (0-indexed).
+- `per_page`: The number of channels per page.
+- `search_key` (optional): Filter by channel name.
+
+```js
+const channelsResponse = ws.getChannels({
+ page: "1", // Page number (0-indexed)
+ per_page: "10", // Number of channels per page
+ search_key: "channel-name" // Filter by channel name
+});
+```
+
+### Get or create channel
+
+You can use the `getOrCreateChannel` method to get an existing channel or create a new one. This method takes an object with the `channel` property, specifying the name of the channel you want to get or create.
+
+```js
+const channelResponse = ws.getOrCreateChannel({
+ channel: "channel-name"
+});
+```
+
+### Update a channel
+
+To update a channel, you can use the `updateChannel` method. This method takes an object with the following parameters:
+
+- `channelId`: The unique identifier (UUID) of the channel you want to update.
+- `channel`: The new name for the channel.
+- `regenerate_pass_key` (optional): A boolean value that, if set to true, regenerates the channel passkey. If set to false, the passkey remains unchanged.
+
+```js
+const channelResponse = ws.updateChannel({
+ channelId: "channel-id",
+ channel: "new-channel-name",
+ regenerate_pass_key: false // (optional) if true, the channel passkey will be regenerated
+});
+```
+
+### Delete a channel
+
+Use the deleteChannel method to delete an existing channel.
+
+```js
+$deleteResponse = $ws->deleteChannel("channel-id");
+```
