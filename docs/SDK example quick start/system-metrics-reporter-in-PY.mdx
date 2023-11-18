@@ -1,0 +1,53 @@
+---
+sidebar_position: 1
+---
+
+# System Metrics Monitor in Python
+
+This Python program is designed to efficiently gather system metrics and provide them as JSON payloads to clients through Websuckit.
+This can be incredibly helpful for monitoring and analyzing system performance, as well as identifying areas for improvement.
+
+**[Github Repository](https://github.com/WebSuckIt/web-suck-it-py/edit/main/examples/sysmetrics_reporter)**
+
+## Project Directory
+
+The project directory contains the following files:
+
+- `config.py`: Contains configuration settings for the program.
+- `metrics.py`: Contains functions for gathering system metrics.
+- `server.py`: Contains the System metric server implementation for gathering and sending json.
+- `sockit.py`: Contains the Websocket and WebSuckit implementation.
+- `client.py`: Contains the System metric client implementation for receiving and processing JSON payloads.
+
+## Usage
+
+- Clone github repository `git clone https://github.com/WebSuckIt/web-suck-it-py`
+- Change directory into `example` folder
+- Install the required dependencies by running `pip install -r requirements.txt`.
+
+### Setting up the environment variables
+
+```bash
+# Get PUBLIC_KEY, USER_ID, CHANNEL_NAME, ACCESS_KEY from dashboard https://websuckit.com/dashboard
+export WEBSUCKIT_USER_ID=USER_ID
+export WEB_SUCKIT_PUBLIC_KEY=PUBLIC_KEY
+export WEBSUCKIT_CHANNEL_NAME=CHANNEL_NAME
+export WEB_SUCKIT_USER_ACCESS_KEY=ACCESS_KEY
+```
+
+### Configuration
+
+The following configuration settings are available in `config.py` : <br/>
+`report_interval`: integer - The time interval for reporting <br/>
+`verbose`: boolean - basic logging level <br/>
+`websuckit_user_access_key`: string <br/>
+`websuckit_user_id`: UUID <br/>
+`websuckit_public_key`: string <br/>
+`websuckit_channel_name`: string
+
+### Server
+
+To use this program, follow these steps:
+
+1. Start the server by running `python server.py`.
+2. The server will send JSON payloads containing system metrics over the WebSocket connection.

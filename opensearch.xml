@@ -4,8 +4,8 @@
   <ShortName>Websuckit</ShortName>
   <Description>Search Websuckit</Description>
   <InputEncoding>UTF-8</InputEncoding>
-  <Image width="16" height="16" type="image/x-icon">https://web-suck-it-docs.websuckit.com/img/favicon.ico</Image>
-  <Url type="text/html" method="get" template="https://web-suck-it-docs.websuckit.com/search?q={searchTerms}"/>
-  <Url type="application/opensearchdescription+xml" rel="self" template="https://web-suck-it-docs.websuckit.com/opensearch.xml" />
-  <moz:SearchForm>https://web-suck-it-docs.websuckit.com/</moz:SearchForm>
+  <Image width="16" height="16" type="image/x-icon">https://docs.websuckit.com/img/favicon.ico</Image>
+  <Url type="text/html" method="get" template="https://docs.websuckit.com/search?q={searchTerms}"/>
+  <Url type="application/opensearchdescription+xml" rel="self" template="https://docs.websuckit.com/opensearch.xml" />
+  <moz:SearchForm>https://docs.websuckit.com/</moz:SearchForm>
 </OpenSearchDescription>
