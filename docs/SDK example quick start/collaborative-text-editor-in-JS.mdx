@@ -1,0 +1,127 @@
+---
+sidebar_position: 1
+---
+
+# Collaborative Text editor in JS
+
+```js title="/src/script.js"
+import Websuckit from "@websuckit/js";
+import "./styles.css";
+
+// Get PUBLIC_KEY, USER_ID, CHANNEL_PASSKEY, CHANNEL_NAME from dashboard https://websuckit.com/dashboard
+const config = {
+  publicKey: "PUBLIC_KEY";
+  userId: "USER_ID";
+};
+
+// Websuckit initialization
+const websuckitInit = new Websuckit({ ...config });
+
+// Get websocket  connection url from Websuckit
+const connectionUrl = websuckitInit.getConnectionUrl({
+  channelName: "CHANNEL_NAME", // Insert a valid channel name
+  channelPassKey: "CHANNEL_PASSKEY",
+  replaySelf: false,
+}).value;
+
+let aceEditor = null;
+let last_applied_change = null;
+let just_cleared_buffer = null;
+aceEditor = ace.edit("aceEditor");
+aceEditor.getSession().setValue(
+  `const websuckit = "Realtime interactive Js Code editor with Websuckit"
+  `
+);
+aceEditor.setTheme("ace/theme/tomorrow");
+aceEditor.getSession().setMode("ace/mode/javascript");
+aceEditor.$blockScrolling = Infinity;
+
+// Connect to websocket Url
+const ws = new WebSocket(connectionUrl);
+
+ws.addEventListener("close", (event) => {
+  console.log("The connection has been closed successfully.");
+});
+
+ws.addEventListener("open", (event) => {
+  console.log("The connection has been opened successfully.");
+});
+
+//TODO: listen when a user joined and send data
+ws.addEventListener("message", (event) => {
+  const delta = JSON.parse(event.data).data;
+  last_applied_change = delta;
+  aceEditor.getSession().getDocument().applyDeltas([delta]);
+});
+
+aceEditor.on(
+  "change",
+  function (e) {
+    console.log({ last_applied_change, e }, deepEqual(last_applied_change, e));
+    // TODO, we could make things more efficient and not likely to conflict by keeping track of change IDs
+    if (!deepEqual(last_applied_change, e.data)) {
+      ws.send(JSON.stringify(e));
+      last_applied_change = e.data;
+    }
+    just_cleared_buffer = false;
+  },
+  false
+);
+
+just_cleared_buffer = true;
+document.getElementsByTagName("textarea")[0].focus();
+just_cleared_buffer = false;
+last_applied_change = null;
+
+// Utils to compare object
+function deepEqual(x, y) {
+  return x && y && typeof x === "object" && typeof y === "object"
+    ? Object.keys(x).length === Object.keys(y).length &&
+        Object.keys(x).reduce(function (isEqual, key) {
+          return isEqual && deepEqual(x[key], y[key]);
+        }, true)
+    : x === y;
+}
+```
+
+```html title="/src/index.html"
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Collaborative Text editor in JS</title>
+    <meta charset="UTF-8" />
+
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.1.01/ace.js"
+      type="text/javascript"
+      charset="utf-8"
+    ></script>
+  </head>
+  <body>
+    <div id="wrapper">
+      <div id="aceEditor" class="aceEditor"></div>
+    </div>
+
+    <script src="src/index.js"></script>
+  </body>
+</html>
+```
+
+```css title="/src/style.css"
+#aceEditor {
+  width: 100%;
+  height: 100vh;
+  /* margin-left: 10%; */
+  /* margin-right: 10%; */
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  display: block;
+}
+
+div.aceEditor {
+  width: 100%;
+  height: 100%;
+}
+```
