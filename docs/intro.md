@@ -47,4 +47,4 @@ To add a channel, from your dashboard, click the **Add Channel** button, a name 
 
 ### Next steps
 
-Now that you have your keys, you can our [quick start](/category/sdk-quick-start) guide to get started in your preferred language.
+Now that you have your keys, you can use our [quick start](/category/sdk-quick-start) guide to get started in your preferred language.
