@@ -51,13 +51,16 @@ const config = {
           // Remove this to remove the "edit this page" links.
           // editUrl:
           //   "https://github.com/facebook/docusaurus/tree/main/packages/create-docusaurus/templates/shared/",
+          // Advanced use-case: functional editUrl
+          editUrl: ({ versionDocsDirPath, docPath }) =>
+            `https://github.com/WebSuckIt/web-suck-it-docs/edit/main/${versionDocsDirPath}/${docPath}`,
         },
+
         blog: {
           showReadingTime: true,
           // Please change this to your repo.
           // Remove this to remove the "edit this page" links.
-          editUrl:
-            "https://github.com/facebook/docusaurus/tree/main/packages/create-docusaurus/templates/shared/",
+          editUrl: "https://github.com/WebSuckIt/web-suck-it-docs",
         },
         theme: {
           customCss: require.resolve("./src/css/custom.css"),
