@@ -117,6 +117,39 @@ const config = {
         ],
       },
       footer: {
+        links: [
+          // {
+          //   title: "Docs",
+          //   items: [
+          //     {
+          //       label: "Tutorial",
+          //       to: "/",
+          //     },
+          //   ],
+          // },
+          {
+            title: "Community",
+            items: [
+              {
+                label: "Twitter",
+                href: "https://twitter.com/websuckit",
+              },
+            ],
+          },
+          {
+            title: "More",
+            items: [
+              {
+                label: "Blog",
+                to: "/blog",
+              },
+              {
+                label: "GitHub",
+                href: "https://github.com/websuckit",
+              },
+            ],
+          },
+        ],
         style: "dark",
         copyright: `Copyright © ${new Date().getFullYear()} Websuckit`,
       },
