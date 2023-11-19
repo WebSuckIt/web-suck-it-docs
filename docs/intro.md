@@ -5,7 +5,7 @@ slug: /
 
 # Getting started
 
-Welcome to WebSuckIt! WebSuckIt simplifies the integration of a websocket platform into your application. In this guide you will how to easily integrate the WebSuckIt real-time platform into your application.
+Welcome to WebSuckIt! WebSuckIt simplifies the integration of a websocket platform into your application. In this guide you'll learn how to easily integrate the WebSuckIt real-time platform into your application.
 
 In this guide, you'll learn how to:
 
