@@ -133,5 +133,7 @@ const channelResponse = ws.updateChannel({
 Use the deleteChannel method to delete an existing channel.
 
 ```js
-$deleteResponse = $ws->deleteChannel("channel-id");
+const channelResponse = ws.deleteChannel({
+  channelId: "channel-id",
+})
 ```
