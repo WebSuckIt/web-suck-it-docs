@@ -18,7 +18,7 @@ const Card = ({
     <div className="card">
      <div className="text--truncate">
       <div style={{ display: "flex", alignItems: "self-end", gap: "8px" }}>
-       {icon ? icon : ""}
+       {icon ? <span title={title}>{icon}</span> : ""}
        <h2 className="text--truncate" title={title}>
         {title}
        </h2>
