@@ -33,3 +33,56 @@
 video {
  aspect-ratio: 16/9;
 }
+
+.quickstart .card {
+ display: flex;
+ flex-direction: column;
+ padding: 20px;
+ cursor: pointer;
+ border: 1px solid var(--ifm-color-emphasis-200);
+}
+
+.quickstart .card:hover {
+ border-color: var(--ifm-color-primary) !important;
+}
+
+.quickstart .card h2 {
+ text-transform: capitalize;
+ font-size: 1.3rem;
+ margin: 0;
+}
+
+.quickstart .card a {
+ margin-left: auto;
+ margin-top: auto;
+ display: flex;
+ align-items: center;
+}
+
+.quickstart .card-header {
+ display: flex;
+ gap: 0.75rem;
+ align-items: center;
+ margin-bottom: 1rem;
+}
+
+.quickstart .card p{
+  font-size: .8rem;
+}
+
+.quickstart .card svg{
+  width: 28px;
+  height: 28px;
+  color: blue !important;
+}
+
+.quickstart {
+ display: grid;
+ grid-template-columns: repeat(2, 1fr);
+ gap: 0.75rem;
+ align-items: center;
+
+ @media (max-width: 768px) {
+  grid-template-columns: 1fr;
+ }
+}

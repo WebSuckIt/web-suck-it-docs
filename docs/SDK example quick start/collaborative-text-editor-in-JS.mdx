@@ -13,21 +13,21 @@ By following this guide, you will acquire the knowledge to produce a simple text
 
 ## Get user keys
 
-To access your User Keys i.e `PUBLIC_KEY`, `USER_ID` and `ACCESS_KEY`, [**Create a free account**](https://websuckit.com/signup) and navigate to your dashboard, hover over the **Account** button in the top right corner of the page, and then click on the **User Keys** button.
+To access your User Keys i.e `PUBLIC_KEY`, `USER_ID` and `ACCESS_KEY`, [**create a free account**](https://websuckit.com/signup) and navigate to your dashboard, hover over the **Account** button in the top right corner of the page, and then click on the **User Keys** button.
 
 ## Get Channel keys
 
-To access your Channel Keys ie `CHANNEL_PASSKEY` and `CHANNEL_NAME`, [**Create a free account**](https://websuckit.com/signup) and navigate to your dashboard, click on the channel and proceed to click on the `Channel Keys` tab.
+In order to access your Channel Keys such as `CHANNEL_PASSKEY` and `CHANNEL_NAME`, you will need to [**create a free account**](https://websuckit.com/signup) first. Once you have done that, navigate to your dashboard and click on the "Add Channel" button. After that, click on "Create" to add a new channel. Finally, click on the name of the channel you just created and then click on the "Channel Keys" tab. There, you will be able to access your Channel Keys.
 
 ## Create webpage
 
-We'll make use of [**Ace**](https://ace.c9.io) for the code editor but you can use any library of your choice for this, Proceed to creating `index.html`, `script.js` and `style.css` then copy and paste code below. 
+We will be using [**Ace**](https://ace.c9.io) for the code editor, but feel free to use any library of your choice. Create `index.html`, `index.js` and `styles.css`, then copy and paste the following code respectively.
 
 <Tabs
-    defaultValue="javascript"
+    defaultValue="html"
     values={[
-        {label: 'Html', value: 'html'},
-        {label: 'Javascript', value: 'javascript'},
+        {label: 'HTML', value: 'html'},
+        {label: 'JavaScript', value: 'javascript'},
         {label: 'CSS', value: 'css'},
     ]}>
 
@@ -36,23 +36,23 @@ We'll make use of [**Ace**](https://ace.c9.io) for the code editor but you can u
 ```html title="/src/index.html"
 <!DOCTYPE html>
 <html>
-  <head>
-    <title>Collaborative Text editor in JS</title>
-    <meta charset="UTF-8" />
+ <head>
+  <title>Collaborative Text editor in JS</title>
+  <meta charset="UTF-8" />
 
-    <script
-      src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.1.01/ace.js"
-      type="text/javascript"
-      charset="utf-8"
-    ></script>
-  </head>
-  <body>
-    <div id="wrapper">
-      <div id="aceEditor" class="aceEditor"></div>
-    </div>
+  <script
+   src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.1.01/ace.js"
+   type="text/javascript"
+   charset="utf-8"
+  ></script>
+ </head>
+ <body>
+  <div id="wrapper">
+   <div id="aceEditor" class="aceEditor"></div>
+  </div>
 
-    <script src="src/index.js"></script>
-  </body>
+  <script src="index.js"></script>
+ </body>
 </html>
 ```
 
@@ -64,17 +64,16 @@ We'll make use of [**Ace**](https://ace.c9.io) for the code editor but you can u
 import Websuckit from "@websuckit/js";
 import "./styles.css";
 
-// Get PUBLIC_KEY, USER_ID, CHANNEL_PASSKEY, CHANNEL_NAME from dashboard https://websuckit.com/dashboard
 const userKeys = {
-  publicKey: "PUBLIC_KEY";
-  userId: "USER_ID";
+ publicKey: "PUBLIC_KEY", // Replace with 'PUBLIC_KEY' from dashboard
+ userId: "USER_ID" // Replace with 'USER_ID' from dashboard
 };
 
 const channelKeys = {
-  channelName: "CHANNEL_NAME", // Insert a valid channel name
-  channelPassKey: "CHANNEL_PASSKEY",
-  replaySelf: false, // Send message to self
-}
+ channelName: "CHANNEL_NAME", // Replace with 'CHANNEL_NAME' from dashboard
+ channelPassKey: "CHANNEL_PASSKEY", // Replace with 'CHANNEL_PASSKEY' from dashboard
+ replaySelf: false // Send message to self
+};
 
 // Websuckit initialization
 const websuckitInit = new Websuckit({ ...userKeys });
@@ -86,26 +85,25 @@ const connectionUrl = websuckitInit.getConnectionUrl({ ...channelKeys }).value;
 const ws = new WebSocket(connectionUrl);
 
 ws.addEventListener("close", (event) => {
-  console.log("The connection has been closed successfully.");
+ console.log("The connection has been closed successfully.");
 });
 
 ws.addEventListener("open", (event) => {
-  console.log("The connection has been opened successfully.");
+ console.log("The connection has been opened successfully.");
 });
 
 ws.addEventListener("message", (event) => {
-  const delta = JSON.parse(event.data).data;
-  last_applied_change = delta;
-  aceEditor.getSession().getDocument().applyDeltas([delta]);
+ const delta = JSON.parse(event.data).data;
+ last_applied_change = delta;
+ aceEditor.getSession().getDocument().applyDeltas([delta]);
 });
-
 
 let aceEditor = null;
 let last_applied_change = null;
 let just_cleared_buffer = null;
 aceEditor = ace.edit("aceEditor");
 aceEditor.getSession().setValue(
-  `const websuckit = "Realtime interactive Js Code editor with Websuckit"
+ `const websuckit = "Realtime interactive Js Code editor with Websuckit"
   `
 );
 aceEditor.setTheme("ace/theme/tomorrow");
@@ -113,15 +111,15 @@ aceEditor.getSession().setMode("ace/mode/javascript");
 aceEditor.$blockScrolling = Infinity;
 
 aceEditor.on(
-  "change",
-  function (e) {
-    if (!deepEqual(last_applied_change, e.data)) {
-      ws.send(JSON.stringify(e));
-      last_applied_change = e.data;
-    }
-    just_cleared_buffer = false;
-  },
-  false
+ "change",
+ function (e) {
+  if (!deepEqual(last_applied_change, e.data)) {
+   ws.send(JSON.stringify(e));
+   last_applied_change = e.data;
+  }
+  just_cleared_buffer = false;
+ },
+ false
 );
 
 just_cleared_buffer = true;
@@ -131,12 +129,12 @@ last_applied_change = null;
 
 // Utils to compare object
 function deepEqual(x, y) {
-  return x && y && typeof x === "object" && typeof y === "object"
-    ? Object.keys(x).length === Object.keys(y).length &&
-        Object.keys(x).reduce(function (isEqual, key) {
-          return isEqual && deepEqual(x[key], y[key]);
-        }, true)
-    : x === y;
+ return x && y && typeof x === "object" && typeof y === "object"
+  ? Object.keys(x).length === Object.keys(y).length &&
+     Object.keys(x).reduce(function (isEqual, key) {
+      return isEqual && deepEqual(x[key], y[key]);
+     }, true)
+  : x === y;
 }
 ```
 
@@ -144,24 +142,22 @@ function deepEqual(x, y) {
 
 <TabItem value="css">
 
-```css title="/src/style.css"
+```css title="./styles.css"
 #aceEditor {
-  width: 100%;
-  height: 100vh;
-  top: 0;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  display: block;
+ width: 100%;
+ height: 100vh;
+ top: 0;
+ bottom: 0;
+ left: 0;
+ right: 0;
+ display: block;
 }
 
 div.aceEditor {
-  width: 100%;
-  height: 100%;
+ width: 100%;
+ height: 100%;
 }
 ```
 
 </TabItem>
 </Tabs>
-
-
