@@ -35,9 +35,8 @@ video {
 }
 
 .quickstart .card {
- display: flex;
- flex-direction: column;
- padding: 20px;
+ display: grid;
+ padding: 32px;
  cursor: pointer;
  border: 1px solid var(--ifm-color-emphasis-200);
 }
@@ -66,14 +65,15 @@ video {
  margin-bottom: 1rem;
 }
 
-.quickstart .card p{
-  font-size: .8rem;
+.quickstart .card p {
+ font-size: 0.8rem;
+ margin-bottom: 0;
 }
 
-.quickstart .card svg{
-  width: 28px;
-  height: 28px;
-  color: blue !important;
+.quickstart .card svg {
+ width: 28px;
+ height: 28px;
+ color: blue !important;
 }
 
 .quickstart {
@@ -83,6 +83,6 @@ video {
  align-items: center;
 
  @media (max-width: 768px) {
-  grid-template-columns: 1fr;
+  grid-template-columns: repeat(1, 1fr) !important;
  }
 }
